@@ -69,7 +69,7 @@ public class FraudeApp {
         else if (workerAnalyse.getEtat())
             statut.setEtat("Analyse");
         else
-            statut.setEtat("Prêt");
+            statut.setEtat("Pret");
         statut.setNbrFacturesChargees(workerChargement.getNbrFactures());
         statut.setNbrFraudeursTrouves(workerAnalyse.getNbrFraudeurs());
         return statut;
