@@ -10,12 +10,14 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.util.ArrayList;
 
 public class GUIFraudeurAPP extends JFrame {
 
     private FraudeApp fraudeApp;
     private DefaultListModel<Fraudeur> itemsListModel;
     private JList itemsList;
+    private ArrayList<Fraudeur> listFraudeurs;
 
     public GUIFraudeurAPP(FraudeApp fraudeApp)
     {
@@ -61,6 +63,13 @@ public class GUIFraudeurAPP extends JFrame {
     private JScrollPane createFraudeList()
     {
         itemsListModel = new DefaultListModel<>();
+
+        if (listFraudeurs != null)
+        {
+            for (Fraudeur fraudeur : listFraudeurs) {
+                itemsListModel.addElement(fraudeur);
+            }
+        }
         itemsList = new JList(itemsListModel);
         itemsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane listScroller = new JScrollPane(itemsList);
@@ -74,7 +83,7 @@ public class GUIFraudeurAPP extends JFrame {
         itemButtons.add(createChargementButton());
         itemButtons.add(createAnalyseButton());
         itemButtons.add(createStatutButton());
-        //itemButtons.add(createAfficherButton());
+        itemButtons.add(createAfficherButton());
         //itemButtons.add(createStopButton());
 
         return itemButtons;
@@ -117,6 +126,24 @@ public class GUIFraudeurAPP extends JFrame {
             new GUIStatutDialog(this, statut);
         });
 
+        return button;
+    }
+
+    private JButton createAfficherButton() {
+        JButton button = new JButton(new ImageIcon("icons/afficher.png"));
+        button.setBorder(buttonBorder());
+
+        button.addActionListener(event -> {
+            try {
+                listFraudeurs =  fraudeApp.afficherFraudeurs();
+                getContentPane().removeAll();
+                createAndShowGUI();
+                repaint();
+                revalidate();
+            } catch (ExceptionAnalyseIsRunning | ExceptionListeFraudeursIsNull exChargementRunning) {
+                exChargementRunning.printStackTrace();
+            }
+        });
         return button;
     }
 

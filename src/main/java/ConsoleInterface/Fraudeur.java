@@ -41,4 +41,9 @@ public class Fraudeur {
     public int hashCode() {
         return Objects.hash(compagnie, ratio);
     }
+
+    @Override
+    public String toString() {
+        return getCompagnie() + " " + Math.round(getRatio()) + "% de factures dupliquees";
+    }
 }
