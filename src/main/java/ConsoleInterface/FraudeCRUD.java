@@ -39,6 +39,45 @@ public class FraudeCRUD {
         }
     }
 
+    public void supprimerFraudeur(String compagnie)
+    {
+        String sql = "DELETE FROM fraudeur WHERE id_compagnie = ?";
+
+        PreparedStatement statement;
+        try {
+            statement = conn.prepareStatement(sql);
+
+            statement.setString(1, compagnie);
+
+            statement.executeUpdate();
+            statement.close();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public Fraudeur readFraudeur(String compagnie)
+    {
+        Fraudeur fraudeur = null;
+        Statement statement;
+        try {
+            statement = conn.createStatement();
+
+            String sql = "SELECT * FROM fraudeur WHERE id_compagnie = " + compagnie;
+            ResultSet resultSet = statement.executeQuery(sql);
+            if(resultSet.next())
+            {
+                fraudeur = new Fraudeur(resultSet.getString("id_compagnie"),
+                        resultSet.getDouble("pourcentage_dupli"));
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return fraudeur;
+    }
+
     public void supprimerAllFraudeurs()
     {
         String sql = "DELETE FROM fraudeur";
