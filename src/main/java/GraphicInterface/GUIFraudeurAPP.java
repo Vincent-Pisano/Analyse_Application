@@ -27,6 +27,9 @@ public class GUIFraudeurAPP extends JFrame {
     }
 
     private void createAndShowGUI() {
+        ImageIcon logo = new ImageIcon("icons/logo.png");
+        setIconImage(logo.getImage());
+
         add(createTitlePane(), BorderLayout.NORTH);
         add(createContentPane(), BorderLayout.CENTER);
 
@@ -41,7 +44,7 @@ public class GUIFraudeurAPP extends JFrame {
 
         contentPane.add(createFraudeActions(), BorderLayout.NORTH);
         contentPane.add(createFraudeList(), BorderLayout.CENTER);
-        //contentPane.add(createNewButton(), BorderLayout.SOUTH);
+        contentPane.add(createQuitterButton(), BorderLayout.SOUTH);
 
         return contentPane;
     }
@@ -51,7 +54,7 @@ public class GUIFraudeurAPP extends JFrame {
         titlePane.setLayout(new BoxLayout(titlePane, BoxLayout.Y_AXIS));
         titlePane.setBorder(border());
 
-        JLabel title = new JLabel("Chercheur de fraudeurs", SwingConstants.CENTER);
+        JLabel title = new JLabel("Recherche de fraudeurs", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 16));
         title.setBorder(titleBorder());
         titlePane.add(title);
@@ -84,7 +87,7 @@ public class GUIFraudeurAPP extends JFrame {
         itemButtons.add(createAnalyseButton());
         itemButtons.add(createStatutButton());
         itemButtons.add(createAfficherButton());
-        //itemButtons.add(createStopButton());
+        itemButtons.add(createStopButton());
 
         return itemButtons;
     }
@@ -147,8 +150,41 @@ public class GUIFraudeurAPP extends JFrame {
         return button;
     }
 
+    private JButton createStopButton() {
+        JButton button = new JButton(new ImageIcon("icons/stop.png"));
+        button.setBorder(buttonBorder());
 
+        button.addActionListener(event -> {
+            try {
+                fraudeApp.interrompre();
+            } catch (ExceptionNoOperationAInterrompre exceptionNoOperationAInterrompre) {
+                exceptionNoOperationAInterrompre.printStackTrace();
+            }
+        });
 
+        return button;
+    }
+
+    private JPanel createQuitterButton() {
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        JButton button = new JButton(new ImageIcon("icons/quitter.png"));
+
+        button.addActionListener(event -> {
+            try {
+                fraudeApp.quitter();
+                System.exit(0);
+            } catch (ExceptionChargementIsRunning | ExceptionAnalyseIsRunning exceptionChargementIsRunning) {
+                exceptionChargementIsRunning.printStackTrace();
+            }
+        });
+
+        button.setBorder(buttonQuitterBorder());
+        buttonPanel.add(button);
+
+        return buttonPanel;
+    }
 
     private Border border() {
         return BorderFactory.createEmptyBorder(5, 10, 10, 10);
@@ -158,8 +194,8 @@ public class GUIFraudeurAPP extends JFrame {
         return BorderFactory.createEmptyBorder(5, 0, 10, 10);
     }
 
-    private Border buttonNewBorder() {
-        return BorderFactory.createEmptyBorder(5, 0, 0, 0);
+    private Border buttonQuitterBorder() {
+        return BorderFactory.createEmptyBorder(7, 5, 7, 5);
     }
 
     private Border buttonBorder() {
