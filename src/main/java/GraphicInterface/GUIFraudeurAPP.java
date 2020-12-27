@@ -88,6 +88,7 @@ public class GUIFraudeurAPP extends JFrame {
         itemButtons.add(createStatutButton());
         itemButtons.add(createAfficherButton());
         itemButtons.add(createStopButton());
+        itemButtons.add(createSupprimerToutButton());
 
         return itemButtons;
     }
@@ -115,7 +116,8 @@ public class GUIFraudeurAPP extends JFrame {
             try {
                 fraudeApp.lancementAnalyse();
             } catch (ExceptionChargementIsRunning | ExceptionAnalyseIsRunning exChargementRunning) {
-                exChargementRunning.printStackTrace();
+                GUIErreurDialog dialog = new GUIErreurDialog(this, exChargementRunning.getMessage());
+                dialog.setVisible(true);
             }
         });
         return button;
@@ -140,13 +142,19 @@ public class GUIFraudeurAPP extends JFrame {
         button.addActionListener(event -> {
             try {
                 listFraudeurs =  fraudeApp.afficherFraudeurs();
+            } catch (ExceptionAnalyseIsRunning exAnalyseRunning) {
+                GUIErreurDialog dialog = new GUIErreurDialog(this, exAnalyseRunning.getMessage());
+                dialog.setVisible(true);
+            } catch (ExceptionListeFraudeursIsNull exListeFraudeursIsNull) {
+                listFraudeurs = null;
+                GUIErreurDialog dialog = new GUIErreurDialog(this, exListeFraudeursIsNull.getMessage());
+                dialog.setVisible(true);
+            }
+            finally {
                 getContentPane().removeAll();
                 createAndShowGUI();
                 repaint();
                 revalidate();
-            } catch (ExceptionAnalyseIsRunning | ExceptionListeFraudeursIsNull exChargementRunning) {
-                GUIErreurDialog dialog = new GUIErreurDialog(this, exChargementRunning.getMessage());
-                dialog.setVisible(true);
             }
         });
         return button;
@@ -163,6 +171,44 @@ public class GUIFraudeurAPP extends JFrame {
                 GUIErreurDialog dialog = new GUIErreurDialog(this, exceptionNoOperationAInterrompre.getMessage());
                 dialog.setVisible(true);
             }
+        });
+
+        return button;
+    }
+
+    private JButton createSupprimerToutButton() {
+        JButton button = new JButton(new ImageIcon("icons/trash.png"));
+        button.setBorder(buttonBorder());
+
+        button.addActionListener(event -> {
+            GUIConfirmationSuppressionDialog confirmationSuppressionDialog = new GUIConfirmationSuppressionDialog(this);
+
+            confirmationSuppressionDialog.addComponentListener(new ComponentListener() {
+                @Override
+                public void componentResized(ComponentEvent e) { }
+
+                @Override
+                public void componentMoved(ComponentEvent e) { }
+
+                @Override
+                public void componentShown(ComponentEvent e) { }
+
+                @Override
+                public void componentHidden(ComponentEvent e) {
+                    boolean confirmation = confirmationSuppressionDialog.getConfirmation();
+                    if (confirmation)
+                    {
+                        fraudeApp.supprimerTout();
+                        listFraudeurs = null;
+                        getContentPane().removeAll();
+                        createAndShowGUI();
+                        repaint();
+                        revalidate();
+
+                    }
+                }
+            });
+            confirmationSuppressionDialog.setVisible(true);
         });
 
         return button;

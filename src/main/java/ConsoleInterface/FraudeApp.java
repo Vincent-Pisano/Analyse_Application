@@ -87,6 +87,12 @@ public class FraudeApp {
             throw new ExceptionNoOperationAInterrompre();
     }
 
+    public void supprimerTout()
+    {
+        workerAnalyse.supprimerAllFraudeurs();
+        syncTreeMapFactures = Collections.synchronizedSortedMap(new TreeMap<>());
+    }
+
     public void quitter() throws ExceptionChargementIsRunning, ExceptionAnalyseIsRunning {
         if (workerChargement.getEtat())
         {

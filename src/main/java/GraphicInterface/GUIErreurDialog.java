@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class GUIErreurDialog extends JDialog
 {
     public GUIErreurDialog(JFrame frame, String message) {
-        super(frame, "Error", Dialog.ModalityType.DOCUMENT_MODAL);
+        super(frame, "Erreur", Dialog.ModalityType.DOCUMENT_MODAL);
 
         JButton okButton = new JButton("Ok");
         okButton.addActionListener(new ActionListener() {
@@ -30,6 +30,7 @@ public class GUIErreurDialog extends JDialog
         dialogContainer.add(okButtonPanel, BorderLayout.SOUTH);
 
         pack();
+        setLocationRelativeTo(frame);
     }
 
 }

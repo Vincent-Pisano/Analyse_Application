@@ -51,6 +51,7 @@ public class GUIStatutDialog extends JDialog {
 
         setSize(250,175);
         setVisible(true);
+        setLocationRelativeTo(frame);
     }
 
     private JPanel createPanel()
