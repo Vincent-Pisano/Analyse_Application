@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class GUIFraudeurAPP extends JFrame {
 
     private FraudeApp fraudeApp;
-    private DefaultListModel<Fraudeur> itemsListModel;
-    private JList itemsList;
+    private DefaultListModel<Fraudeur> fraudeursListModel;
+    private JList fraudeursList;
     private ArrayList<Fraudeur> listFraudeurs;
 
     public GUIFraudeurAPP(FraudeApp fraudeApp)
@@ -65,17 +65,17 @@ public class GUIFraudeurAPP extends JFrame {
 
     private JScrollPane createFraudeList()
     {
-        itemsListModel = new DefaultListModel<>();
+        fraudeursListModel = new DefaultListModel<>();
 
         if (listFraudeurs != null)
         {
             for (Fraudeur fraudeur : listFraudeurs) {
-                itemsListModel.addElement(fraudeur);
+                fraudeursListModel.addElement(fraudeur);
             }
         }
-        itemsList = new JList(itemsListModel);
-        itemsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane listScroller = new JScrollPane(itemsList);
+        fraudeursList = new JList(fraudeursListModel);
+        fraudeursList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane listScroller = new JScrollPane(fraudeursList);
         return listScroller;
     }
 
@@ -94,10 +94,10 @@ public class GUIFraudeurAPP extends JFrame {
     }
 
     private JButton createChargementButton() {
-        JButton button = new JButton(new ImageIcon("icons/chargement.png"));
-        button.setBorder(buttonBorder());
+        JButton buttonChargement = new JButton(new ImageIcon("icons/chargement.png"));
+        buttonChargement.setBorder(buttonBorder());
 
-        button.addActionListener(event -> {
+        buttonChargement.addActionListener(event -> {
             try {
                 fraudeApp.lancementChargement();
             } catch (ExceptionChargementIsRunning | ExceptionAnalyseIsRunning exChargementRunning) {
@@ -105,14 +105,14 @@ public class GUIFraudeurAPP extends JFrame {
                 dialog.setVisible(true);
             }
         });
-        return button;
+        return buttonChargement;
     }
 
     private JButton createAnalyseButton() {
-        JButton button = new JButton(new ImageIcon("icons/analyse.png"));
-        button.setBorder(buttonBorder());
+        JButton buttonAnalyse = new JButton(new ImageIcon("icons/analyse.png"));
+        buttonAnalyse.setBorder(buttonBorder());
 
-        button.addActionListener(event -> {
+        buttonAnalyse.addActionListener(event -> {
             try {
                 fraudeApp.lancementAnalyse();
             } catch (ExceptionChargementIsRunning | ExceptionAnalyseIsRunning exChargementRunning) {
@@ -120,26 +120,26 @@ public class GUIFraudeurAPP extends JFrame {
                 dialog.setVisible(true);
             }
         });
-        return button;
+        return buttonAnalyse;
     }
 
     private JButton createStatutButton() {
-        JButton button = new JButton(new ImageIcon("icons/statut.png"));
-        button.setBorder(buttonBorder());
+        JButton buttonStatut = new JButton(new ImageIcon("icons/statut.png"));
+        buttonStatut.setBorder(buttonBorder());
 
-        button.addActionListener(event -> {
+        buttonStatut.addActionListener(event -> {
             Statut statut = fraudeApp.afficherStatut();
             new GUIStatutDialog(this, statut);
         });
 
-        return button;
+        return buttonStatut;
     }
 
     private JButton createAfficherButton() {
-        JButton button = new JButton(new ImageIcon("icons/afficher.png"));
-        button.setBorder(buttonBorder());
+        JButton buttonAfficher = new JButton(new ImageIcon("icons/afficher.png"));
+        buttonAfficher.setBorder(buttonBorder());
 
-        button.addActionListener(event -> {
+        buttonAfficher.addActionListener(event -> {
             try {
                 listFraudeurs =  fraudeApp.afficherFraudeurs();
             } catch (ExceptionAnalyseIsRunning exAnalyseRunning) {
@@ -157,14 +157,14 @@ public class GUIFraudeurAPP extends JFrame {
                 revalidate();
             }
         });
-        return button;
+        return buttonAfficher;
     }
 
     private JButton createStopButton() {
-        JButton button = new JButton(new ImageIcon("icons/stop.png"));
-        button.setBorder(buttonBorder());
+        JButton buttonStop = new JButton(new ImageIcon("icons/stop.png"));
+        buttonStop.setBorder(buttonBorder());
 
-        button.addActionListener(event -> {
+        buttonStop.addActionListener(event -> {
             try {
                 fraudeApp.interrompre();
             } catch (ExceptionNoOperationAInterrompre exceptionNoOperationAInterrompre) {
@@ -173,14 +173,14 @@ public class GUIFraudeurAPP extends JFrame {
             }
         });
 
-        return button;
+        return buttonStop;
     }
 
     private JButton createSupprimerToutButton() {
-        JButton button = new JButton(new ImageIcon("icons/trash.png"));
-        button.setBorder(buttonBorder());
+        JButton buttonSupprimer = new JButton(new ImageIcon("icons/trash.png"));
+        buttonSupprimer.setBorder(buttonBorder());
 
-        button.addActionListener(event -> {
+        buttonSupprimer.addActionListener(event -> {
             GUIConfirmationSuppressionDialog confirmationSuppressionDialog = new GUIConfirmationSuppressionDialog(this);
 
             confirmationSuppressionDialog.addComponentListener(new ComponentListener() {
@@ -211,16 +211,16 @@ public class GUIFraudeurAPP extends JFrame {
             confirmationSuppressionDialog.setVisible(true);
         });
 
-        return button;
+        return buttonSupprimer;
     }
 
     private JPanel createQuitterButton() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton button = new JButton(new ImageIcon("icons/quitter.png"));
+        JButton buttonQuitter = new JButton(new ImageIcon("icons/quitter.png"));
 
-        button.addActionListener(event -> {
+        buttonQuitter.addActionListener(event -> {
             try {
                 fraudeApp.quitter();
                 System.exit(0);
@@ -230,8 +230,8 @@ public class GUIFraudeurAPP extends JFrame {
             }
         });
 
-        button.setBorder(buttonQuitterBorder());
-        buttonPanel.add(button);
+        buttonQuitter.setBorder(buttonQuitterBorder());
+        buttonPanel.add(buttonQuitter);
 
         return buttonPanel;
     }

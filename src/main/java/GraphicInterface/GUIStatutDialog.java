@@ -5,8 +5,6 @@ import ConsoleInterface.Statut;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GUIStatutDialog extends JDialog {
     private JFrame frame;
@@ -51,6 +49,8 @@ public class GUIStatutDialog extends JDialog {
 
         setSize(250,175);
         setVisible(true);
+
+        pack();
         setLocationRelativeTo(frame);
     }
 

@@ -1,11 +1,7 @@
 package GraphicInterface;
 
-import ConsoleInterface.FraudeApp;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GUIConfirmationSuppressionDialog extends JDialog{
 
@@ -23,21 +19,15 @@ public class GUIConfirmationSuppressionDialog extends JDialog{
     public void createAndShowGUI()
     {
         JButton yesButton = new JButton("Oui");
-        yesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setConfirmation(true);
-                setVisible(false);
-            }
+        yesButton.addActionListener(e -> {
+            setConfirmation(true);
+            setVisible(false);
         });
 
         JButton cancelButton = new JButton("Annuler");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setConfirmation(false);
-                setVisible(false);
-            }
+        cancelButton.addActionListener(e -> {
+            setConfirmation(false);
+            setVisible(false);
         });
 
         Container dialogContainer = getContentPane();
