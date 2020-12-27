@@ -100,7 +100,8 @@ public class GUIFraudeurAPP extends JFrame {
             try {
                 fraudeApp.lancementChargement();
             } catch (ExceptionChargementIsRunning | ExceptionAnalyseIsRunning exChargementRunning) {
-                exChargementRunning.printStackTrace();
+                GUIErreurDialog dialog = new GUIErreurDialog(this, exChargementRunning.getMessage());
+                dialog.setVisible(true);
             }
         });
         return button;
@@ -144,7 +145,8 @@ public class GUIFraudeurAPP extends JFrame {
                 repaint();
                 revalidate();
             } catch (ExceptionAnalyseIsRunning | ExceptionListeFraudeursIsNull exChargementRunning) {
-                exChargementRunning.printStackTrace();
+                GUIErreurDialog dialog = new GUIErreurDialog(this, exChargementRunning.getMessage());
+                dialog.setVisible(true);
             }
         });
         return button;
@@ -158,7 +160,8 @@ public class GUIFraudeurAPP extends JFrame {
             try {
                 fraudeApp.interrompre();
             } catch (ExceptionNoOperationAInterrompre exceptionNoOperationAInterrompre) {
-                exceptionNoOperationAInterrompre.printStackTrace();
+                GUIErreurDialog dialog = new GUIErreurDialog(this, exceptionNoOperationAInterrompre.getMessage());
+                dialog.setVisible(true);
             }
         });
 
@@ -176,7 +179,8 @@ public class GUIFraudeurAPP extends JFrame {
                 fraudeApp.quitter();
                 System.exit(0);
             } catch (ExceptionChargementIsRunning | ExceptionAnalyseIsRunning exceptionChargementIsRunning) {
-                exceptionChargementIsRunning.printStackTrace();
+                GUIErreurDialog dialog = new GUIErreurDialog(this, exceptionChargementIsRunning.getMessage());
+                dialog.setVisible(true);
             }
         });
 
