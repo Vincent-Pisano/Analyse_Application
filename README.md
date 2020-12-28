@@ -34,6 +34,6 @@ Ce projet est une application graphique permettant le chargement de données ré
       * **GraphicInterface** : contient les classes nécessaires à la partie graphique de l'application.
       * **Exception** : contient les exceptions personnalisées.
       
-   * Ajout des dossiers **factures** (contenant le fichier.csv), **icons** (contenant les icons.png) et **Database** (contenant le code pour créer la base de données MySQL)
+   * Ajout des dossiers **factures** (contenant le fichier.csv), **src/icons** (contenant les icons.png) et **fichiersExternes/database** (contenant le code pour créer la base de données MySQL)
 
 
