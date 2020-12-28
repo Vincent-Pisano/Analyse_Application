@@ -78,6 +78,4 @@ class FraudeCRUDTest {
 
         fraudeurCRUD.supprimerAllFraudeurs();
     }
-
-
 }

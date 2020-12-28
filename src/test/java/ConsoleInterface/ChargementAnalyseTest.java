@@ -88,6 +88,7 @@ class ChargementAnalyseTest {
 
         //analyse
         workerAnalyseTest.incrementRatio(listeFacturesMemeDateMontant);
+        workerAnalyseTest.ajoutDansDatabase();
 
         //recherche dans la base de données
         assertEquals(new Fraudeur(FACTURE_COMPAGNIE_1, new Ratio(1, 1).calculPourcentageDuplique()),
@@ -114,6 +115,7 @@ class ChargementAnalyseTest {
         //analyse
         workerAnalyseTest.incrementRatio(listeFacturesMemeDateMontant);
         workerAnalyseTest.incrementRatio(listeFacturesDifferentesDateMontant);
+        workerAnalyseTest.ajoutDansDatabase();
 
         //recherche dans la base de données
         assertNull(fraudeCRUD.readFraudeur(FACTURE_COMPAGNIE_1));
