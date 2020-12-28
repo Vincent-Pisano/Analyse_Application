@@ -36,4 +36,33 @@ Ce projet est une application graphique permettant le chargement de données ré
       
    * Ajout des dossiers **factures** (contenant le fichier.csv), **src/icons** (contenant les icons.png) et **fichiersExternes/database** (contenant le code pour créer la base de données MySQL)
 
+## Explication du fonctionnement de l'application
 
+## Explication du GUI
+
+### Acceuil
+
+![alt acceuil](https://github.com/Vincent-Pisano/Analyse_Application/blob/master/fichiersExternes/imagesGUI/app.PNG?raw=true)
+
+**Objectifs des boutons**
+
+1. Démarrer le **chargement** des factures
+
+2. Démarrer **l'analyse** des factures chargées
+
+3. Afficher le **statut** de l'application 
+	* ![alt statut](https://github.com/Vincent-Pisano/Analyse_Application/blob/master/fichiersExternes/imagesGUI/statut.PNG?raw=true)
+	* **3 états possibles** : 
+		1. Pret
+		2. Chargement
+		3. Analyse
+		
+4. **Afficher** la liste des fraudeurs suite à l'analyse
+	* ![alt affichage](https://github.com/Vincent-Pisano/Analyse_Application/blob/master/fichiersExternes/imagesGUI/affichage.PNG?raw=true)
+	
+5. **Interrompre** l'application
+
+7. **Supprimer** toutes les données (factures chargées ET fraudeurs trouvés)
+	* ![alt confirmation](https://github.com/Vincent-Pisano/Analyse_Application/blob/master/fichiersExternes/imagesGUI/confirmation.PNG?raw=true)
+
+8. **Quitter** l'application
