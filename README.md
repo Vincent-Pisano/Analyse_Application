@@ -64,6 +64,20 @@ La classe FraudeApp contient les méthodes suivantes :
  * quitter()
 	 * Ferme l'application
 
+### Utilisation de Junit v5.4.2 pour tester les méthodes
+
+La classe de test ChargementAnalyseTest se charge des tests suivants :
+   * ajouterDeuxFacturesMemeDateMontant()
+   * ajouterDeuxFacturesDateMontantDifferents()
+   * analyserDeuxFacturesMemeDateMontant()
+   * analyserDeuxFacturesDateMontantDifferents()
+   
+La classe de test FraudeCRUDTest se charge des tests suivants :
+   * ajouterEtRechercherFraudeur()
+   * supprimerFraudeur()
+   * readAllFraudeur()
+   * supprimerAllFraudeur()
+   
 
 ## Explication du GUI
 
