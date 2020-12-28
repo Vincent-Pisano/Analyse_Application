@@ -32,6 +32,14 @@ public class WorkerChargement extends Worker implements Runnable {
         }
     }
 
+    public void reinitialiseNbrFactures()
+    {
+        synchronized (syncTreeMapFactures)
+        {
+            compteurFacture = 0;
+        }
+    }
+
     @Override
     void start() {
         super.start();
